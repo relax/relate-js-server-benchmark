@@ -1,0 +1,45 @@
+{
+  "name": "relate-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cp ../relate/dist/index.js ./node_modules/relate-js/dist/index.js && webpack --colors --config ./webpack.config.js",
+    "startDev": "npm run build && node build/index",
+    "startProd": "npm run build && NODE_ENV=production node build/index",
+    "start": "npm run startDev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-polyfill": "^6.9.1",
+    "lodash.foreach": "^4.3.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-redux": "^4.4.5",
+    "redux-thunk": "^2.1.0",
+    "relate-js": "^0.5.9"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-react-constant-elements": "^6.9.1",
+    "babel-plugin-transform-react-inline-elements": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "benchmark": "^2.1.0",
+    "eslint": "^2.11.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.3.0",
+    "eslint-plugin-react": "^5.1.1",
+    "webpack": "^1.13.1",
+    "webpack-node-externals": "^1.2.0"
+  }
+}
