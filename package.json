@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cp ../relate/dist/index.js ./node_modules/relate-js/dist/index.js && webpack --colors --config ./webpack.config.js",
+    "copy-local-relate": "cp ../relate/dist/index.js ./node_modules/relate-js/dist/index.js",
+    "build": "webpack --inline --config ./webpack.config.js",
     "startDev": "npm run build && node build/index",
     "startProd": "npm run build && NODE_ENV=production node build/index",
     "start": "npm run startDev",

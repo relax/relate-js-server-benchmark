@@ -5,31 +5,10 @@ import Benchmark from 'benchmark';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {renderToString} from 'react/dist/react.min';
+import {getDataDependencies} from 'relate-js';
 
 import createStore from './src/create-store';
-import getDataDependencies from './src/get-data-dependencies';
 import RootComponent from './src/components';
-
-async function checkResult (component) {
-  await getDataDependencies(component);
-  const result = renderToString(component);
-  fs.writeFile('./build/result.html', result, (err) => {
-    if (err) {
-      return console.log(err);
-    }
-
-    console.log('Result saved!');
-  });
-}
-
-async function renderRoute (component) {
-  await getDataDependencies(component);
-  renderToString(component);
-}
-
-async function renderRouteRelate (component) {
-  await getDataDependencies(component);
-}
 
 function getComp () {
   const store = createStore();
@@ -39,6 +18,59 @@ function getComp () {
       <RootComponent />
     </Provider>
   );
+}
+
+function getData (query) {
+  return {
+    data: {
+      pages: [
+        {
+          _id: 'a',
+          title: 'A'
+        },
+        {
+          _id: 'b',
+          title: 'B'
+        }
+      ],
+      page: {
+        _id: 'c',
+        title: 'C',
+        date: 123
+      }
+    },
+    errors: null
+  };
+}
+
+async function checkResult () {
+  const store = createStore();
+
+  const component = (
+    <Provider store={store}>
+      <RootComponent />
+    </Provider>
+  );
+
+  await getDataDependencies(component, getData);
+  const result = renderToString(component);
+  fs.writeFile('./build/result.html', result, (err) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    console.log('Result saved!');
+    console.log(store.getState());
+  });
+}
+
+async function renderRoute (component) {
+  await getDataDependencies(component, getData);
+  renderToString(component);
+}
+
+async function renderRouteRelate (component) {
+  await getDataDependencies(component, getData);
 }
 
 const suite = new Benchmark.Suite;
@@ -85,7 +117,7 @@ suite
     output(this[0]);
     output(this[1]);
     output(this[2]);
-    checkResult(getComp());
+    checkResult();
   })
   .run();
 
