@@ -120,24 +120,3 @@ suite
     checkResult();
   })
   .run();
-
-// const bench = new Benchmark('relate + react', {
-//   defer: true,
-//   fn: (deferred) => {
-//     renderRoute(getComp())
-//       .then(() => {
-//         deferred.resolve();
-//       })
-//       .catch((error) => {
-//         console.log('error', error);
-//         deferred.reject();
-//       });
-//   },
-//   onComplete: (results) => {
-//     const stats = results.target.stats;
-//     console.log('relate + react');
-//     console.log('Mean:', stats.mean * 1000, 'ms');
-//     console.log('Std dev:', stats.deviation * 1000, 'ms');
-//   }
-// });
-// bench.run();
